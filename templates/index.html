@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Fitness Trainer</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(183deg, #0f4097, #203a43, #2c5364);
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 25px;
+            font-size: 38px;
+            letter-spacing: 1px;
+        }
+
+        .main {
+            display: flex;
+            height: 85vh;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* LEFT PANEL */
+        .sidebar {
+            width: 22%;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar h2 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+        }
+
+        .squat { background: #24c1bd; }
+        .pushup { background: #35e5fe; }
+        .stop { background: #ff416c; }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        /* VIDEO */
+        .video-box {
+            width: 56%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-box img {
+            width: 100%;
+            max-height: 100%;
+            border-radius: 15px;
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+
+        /* RIGHT PANEL */
+        .panel {
+            width: 22%;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .panel h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .card {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        .card p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .instructions {
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        /* subtle animation */
+        .fade {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1> AI Fitness Trainer</h1>
+
+    <div class="main fade">
+
+        <!-- LEFT -->
+        <div class="sidebar">
+            <h2>Workout</h2>
+
+            <button class="btn squat" onclick="startWorkout('squat')">
+                 Squats
+            </button>
+
+            <button class="btn pushup" onclick="startWorkout('pushup')">
+                 Push-Ups
+            </button>
+
+            <button class="btn stop" onclick="stopWorkout()">
+                 Stop
+            </button>
+        </div>
+
+        <!-- CENTER VIDEO -->
+        <div class="video-box">
+            <img id="videoFeed" src="">
+        </div>
+
+        <!-- RIGHT -->
+        <div class="panel">
+            <h2>Live Info</h2>
+
+            <div class="card">
+                <h3>Status</h3>
+                <p id="status">Idle</p>
+            </div>
+
+            <div class="card">
+                <h3>Exercise</h3>
+                <p id="exercise">None</p>
+            </div>
+
+            <div class="card instructions">
+                <h3>Instructions</h3>
+                <p>• Stand sideways to camera</p>
+                <p>• Keep full body visible</p>
+                <p>• Perform slow & controlled reps</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function startWorkout(type) {
+            document.getElementById("videoFeed").src = "/video/" + type;
+            document.getElementById("status").innerText = "Running ";
+            document.getElementById("exercise").innerText = type.toUpperCase();
+        }
+
+        function stopWorkout() {
+            document.getElementById("videoFeed").src = "";
+            document.getElementById("status").innerText = "Stopped";
+            document.getElementById("exercise").innerText = "None";
+        }
+    </script>
+
+</body>
+</html>
